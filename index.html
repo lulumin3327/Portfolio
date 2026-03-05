@@ -9,26 +9,30 @@
 </head>
 <body>
 
-    <header class="navbar-container">
-        <nav class="navbar">
-            <div id="nav-indicator"></div>
-            <div class="nav-group">
-                <a href="#about" class="nav-link">About Me</a>
-                <a href="#service" class="nav-link">Service</a>
-            </div>
+<header class="navbar-container">
+    <nav class="navbar">
+        <div id="nav-indicator"></div> <div class="nav-group left">
+            <a href="#about" class="nav-link lang-en">About Me</a>
+            <a href="#about" class="nav-link lang-zh">關於我</a>
 
-            <div id="logo-button" class="nav-logo">
-                <div class="logo-box">
-                    <img src="assets/logo.svg" alt="AIESHA Logo" class="main-logo">
-                </div>
+            <a href="#service" class="nav-link lang-en">Service</a>
+            <a href="#service" class="nav-link lang-zh">服務</a>
+        </div>
+        <div id="logo-button" class="nav-logo">
+            <div class="logo-box">
+                <img src="assets/logo.svg" alt="AIESHA Logo" class="main-logo">
             </div>
-            <div class="nav-group">
-                <a href="#my-work" class="nav-link">My Work</a>
-                <a href="#contact" class="nav-link">Contact</a>
-                <!-- <button id="lang-switch" class="lang-btn">EN</button> -->
-            </div>
-        </nav>
-    </header>
+        </div>
+        <div class="nav-group right">
+            <a href="#my-work" class="nav-link lang-en">My Work</a>
+            <a href="#my-work" class="nav-link lang-zh">我的作品</a>
+
+            <a href="#contact" class="nav-link lang-en">Contact</a>
+            <a href="#contact" class="nav-link lang-zh">聯絡我</a>
+            <button id="lang-switch" class="lang-btn">EN</button>
+        </div>
+    </nav>
+</header>
 
     <section id="home" class="hero">
         <div class="hero-container">
@@ -46,13 +50,13 @@
     <div class="about-container">
         <div class="about-content">
             <h2 class="about-title">
-                <span class="lang-zh">ABOUT ME</span>
-                <span class="lang-en">ABOUT ME</span>
+                <span class="lang-zh">關於我</span>
+                <span class="lang-en">About Me</span>
             </h2>
             <p class="about-description">
-                <!--<span class="lang-zh">
+                <span class="lang-zh">
                     我是劉愛，一位專注於UI/UX和Web Design的設計師，致力於創造引人入勝且功能完善的數位體驗。我的設計哲學根植於對視覺傳達的熱愛，並且我相信每個設計決策都應該服務於更大的敘事和用戶需求。
-                </span>-->
+                </span>
                 <span class="lang-en">
                 With a background in Visual Communication, I view design as a process of excavation: uncovering clarity and potential layer by layer. I specialize in bridging the gap between aesthetics and digital functionality. My focus lies in UI/UX and Web Design, where I leverage my visual expertise to transform complex ideas into intuitive, interactive, and meaningful digital experiences.
                 </span>
@@ -67,27 +71,36 @@
 
 <section id="service" class="service-section">
     <div class="service-container">
-        <h2 class="service-main-title">SERVICE</h2>
+        <h2 class="service-main-title lang-en">SERVICE</h2>
+        <h2 class="service-main-title lang-zh">服務</h2>
 
         <div class="service-grid">
             <div class="service-card card-blue">
-                <h3>UI/UX</h3>
-                <p>Focusing on intuitive user journeys and visually striking interfaces. I balance aesthetics with functional clarity, moving from wireframes to high-fidelity prototypes.</p>
+                <h3 class="lang-en">UI/UX</h3>
+                <h3 class="lang-zh">UI/UX</h3>
+                <p class="lang-en">Focusing on intuitive user journeys and visually striking interfaces. I balance aesthetics with functional clarity, moving from wireframes to high-fidelity prototypes.</p>
+                <p class="lang-zh">專注於直覺性的使用者旅程和視覺上引人注目的介面。我在美學與功能清晰度之間取得平衡，從線框圖到高保真原型。</p>
             </div>
 
             <div class="service-card card-tall-gray">
-                <h3>Visual Identity & Brand Strategy</h3>
-                <p>Crafting cohesive visual languages for digital products. From logo systems to design guides, I strengthen brand identity within the digital ecosystem.</p>
+                <h3 class="lang-en">Visual Identity & Brand Strategy</h3>
+                <h3 class="lang-zh">視覺識別與品牌策略</h3>
+                <p class="lang-en">Crafting cohesive visual languages for digital products. From logo systems to design guides, I strengthen brand identity within the digital ecosystem.</p>
+                <p class="lang-zh">為數位產品打造一致的視覺語言。從標誌系統到設計指南，我在數位生態系統中強化品牌識別。</p>
             </div>
 
             <div class="service-card card-light-gray">
-                <h3>Web Design & Development (Web UI)</h3>
-                <p>Bridging design and code. I provide responsive web solutions that ensure visual precision and seamless performance across all digital platforms.</p>
+                <h3 class="lang-en">Web Design & Development (Web UI)</h3>
+                <h3 class="lang-zh">網頁設計與開發 (Web UI)</h3>
+                <p class="lang-en">Bridging design and code. I provide responsive web solutions that ensure visual precision and seamless performance across all digital platforms.</p>
+                <p class="lang-zh">連結設計與程式碼。我提供響應式網頁解決方案，確保在所有數位平台上都能保持視覺精度和無縫性能。</p>
             </div>
 
             <div class="service-card card-dark-gray">
-                <h3>Design Systems</h3>
-                <p>Building scalable component libraries and visual guides to ensure consistency and streamline design-to-development workflows.</p>
+                <h3 class="lang-en">Design Systems</h3>
+                <h3 class="lang-zh">設計系統</h3>
+                <p class="lang-en">Building scalable component libraries and visual guides to ensure consistency and streamline design-to-development workflows.</p>
+                <p class="lang-zh">建立可擴展的組件庫和視覺指南，以確保一致性並簡化設計到開發的工作流程。</p>
             </div>
         </div>
     </div>
@@ -95,53 +108,63 @@
 
     <section id="my-work" class="work-section">
     <div class="work-container">
-        <h2 class="work-main-title">MY WORK</h2>
+        <h2 class="work-main-title lang-en">MY WORK</h2>
+        <h2 class="work-main-title lang-zh">我的作品</h2>
 
     <div class="work-grid">
         <div class="work-item">
             <a href="project-detail.html" class="work-link">
                 <div class="work-image-box">
                     <img src="assets/p_1/project1.png" alt="Project 1">
-                    <div class="work-overlay">View Project</div>
+                    <div class="work-overlay lang-en">View Project</div>
+                    <div class="work-overlay lang-zh">查看項目</div>
                 </div>
             </a>
-            <p class="work-info">UX/UI Research</p>
+            <p class="work-info lang-en">(EN)</p>
+            <p class="work-info lang-zh">時光交換所</p>
         </div>
 
         <div class="work-item">
             <a href="project-detail-2.html" class="work-link">
                 <div class="work-image-box">
                     <img src="assets/p_2/project2.png" alt="Project 2">
-                    <div class="work-overlay">View Project</div>
+                    <div class="work-overlay lang-en">View Project</div>
+                    <div class="work-overlay lang-zh">查看項目</div>
                 </div>
             </a>
-            <p class="work-info">Web Design</p>
+            <p class="work-info lang-en">Brand Design</p>
+            <p class="work-info lang-zh">品牌設計</p>
         </div>
 
         <div class="work-item">
             <a href="project-detail-3.html" class="work-link">
                 <div class="work-image-box">
                     <img src="assets/p_3/project3.png" alt="Project 3">
-                    <div class="work-overlay">View Project</div>
+                    <div class="work-overlay lang-en">View Project</div>
+                    <div class="work-overlay lang-zh">查看項目</div>
                 </div>
             </a>
-            <p class="work-info">Web Design</p>
+            <p class="work-info lang-en">Brand Design</p>
+            <p class="work-info lang-zh">品牌設計</p>
         </div>
 
         <div class="work-item">
             <a href="project-detail-4.html" class="work-link">
                 <div class="work-image-box">
                     <img src="assets/chococat/project4.png" alt="Project 4">
-                    <div class="work-overlay">View Project</div>
+                    <div class="work-overlay lang-en">View Project</div>
+                    <div class="work-overlay lang-zh">查看項目</div>
                 </div>
             </a>
-            <p class="work-info">Web Design</p>
+            <p class="work-info lang-en">Web Design</p>
+            <p class="work-info lang-zh">網頁設計</p>
         </div>
     
     </div>
 
         <div class="see-more-container">
-            <a href="my-work.html" class="see-more-btn">See More</a>
+            <a href="my-work.html" class="see-more-btn lang-en">See More</a>
+            <a href="my-work.html" class="see-more-btn lang-zh">查看更多</a>
         </div>
     </div>
 </section>
@@ -149,25 +172,36 @@
 <section class="contact-section" id="contact">
     <div class="contact-container">
         <div class="contact-main">
-            <h2 class="contact-title">CONTACT ME</h2>
-            <p class="contact-spark">
-                Every collaboration begins with a spark — <br>
+            <h2 class="contact-title lang-en">CONTACT ME</h2>
+            <h2 class="contact-title lang-zh">聯繫我</h2>
+            <p class="contact-spark lang-en">
+                Every collaboration begins with a spark
                 if you have an idea waiting to be unearthed, let’s explore it together.
+            </p>
+            <p class="contact-spark lang-zh">
+            每次合作都從一個火花開始
+            如果你有想法等待被挖掘，讓我們一起探索它。
             </p>
         </div>
 
         <div class="contact-info-grid">
             <div class="info-group">
-                <h3>Navigation</h3>
+                <h3 class="lang-en">Navigation</h3>
+                <h3 class="lang-zh">導航</h3>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Me</a></li>
-                    <li><a href="#service">Services</a></li>
-                    <li><a href="#my-work">My Work</a></li>
+                    <li><a href="#home" class="lang-en">Home</a></li>
+                    <li><a href="#home" class="lang-zh">首頁</a></li>
+                    <li><a href="#about" class="lang-en">About Me</a></li>
+                    <li><a href="#about" class="lang-zh">關於我</a></li>
+                    <li><a href="#service" class="lang-en">Services</a></li>
+                    <li><a href="#service" class="lang-zh">服務</a></li>
+                    <li><a href="#my-work" class="lang-en">My Work</a></li>
+                    <li><a href="#my-work" class="lang-zh">我的作品</a></li>
                 </ul>
             </div>
             <div class="info-group">
-                <h3>Contact</h3>
+                <h3 class="lang-en">Contact</h3>
+                <h3 class="lang-zh">聯繫</h3>
                 <p>aliu06778@gmail.com</p>
                 <p>www.aieshaliu.com</p>
                 <p>0952557622</p>
@@ -201,6 +235,10 @@
 </footer>
 
 <script src="script.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 
 </body>
 </html>

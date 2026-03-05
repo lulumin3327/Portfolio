@@ -7,7 +7,7 @@
 
 body {
     background-color: #101010;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial', 'Noto Sans TC', sans-serif;
     overflow-x: hidden;
 }
 
@@ -15,17 +15,20 @@ h2{
     font-size: 48px; /* 修改為你想要的大小 */
     color: white;
     padding: 100px;
-    font-family: 'Italiana', serif; /* 建議配合你的品牌字體 */
+    font-family: 'Italiana', 'Noto Sans TC', serif;
     text-transform: uppercase; /* 視需求決定是否轉為大寫 */
 }
 
 /* Header 樣式 */
 .navbar {
-    position: relative; /* 這是為了讓 #nav-indicator 相對它定位 */
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 30px;
+    justify-content: space-between; /* 改為兩端對齊 */
+    width: 100%;
+    padding: 0 20px;
 }
+
 /* 導覽列容器 - 磨砂玻璃效果 */
 .navbar-container {
     position: fixed;
@@ -44,9 +47,20 @@ h2{
     justify-content: center;
     align-items: center;
 }
+
 .nav-group {
     display: flex;
     gap: 20px;
+    flex: 1; /* 核心修改：平分剩餘空間 */
+    align-items: center; /* 確保文字垂直居中 */
+}
+
+.nav-group.right {
+    justify-content: center; /* 右側組靠中間對齊 */
+}
+
+.nav-group.left {
+    justify-content: center; /* 左側組中間對齊 */
 }
 
 .nav-link, .logo-text {
@@ -57,16 +71,29 @@ h2{
     font-weight: 600;
     color: #101010; /* 預設為黑色 */
     transition: color 0.3s ease;
+    white-space: nowrap;
+    min-width: fit-content;
 }
+
+/* 修正文字偏上的問題 */
+.nav-link {
+    display: flex;
+    align-items: center;
+    line-height: 1; /* 統一行高 */
+    height: 100%;
+}
+
 /*logo*/
+/* 修正 LOGO 容器 */
 .nav-logo {
     cursor: pointer;
     position: relative;
-    padding: 10px 20px;
-    z-index: 2; /* 提高層級，確保在藍色塊上面 */
+    padding: 0 20px;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 0 0 auto; /* LOGO 不伸縮 */
 }
 
 .logo-text {
@@ -117,6 +144,12 @@ h2{
 /* 當被選中時，文字變白色才清晰 */
 .nav-link.active, .nav-logo.active .logo-text {
     color: #ffffff !important; /* 強制變白 */
+}
+
+@media (max-width: 600px) {
+    .nav-group { gap: 10px; }
+    .nav-link { font-size: 12px; }
+    .main-logo { width: 120px; }
 }
 
 .lang-btn {
@@ -172,6 +205,11 @@ h2{
     display: block;
 }
 
+/* 提高圖片渲染性能 */
+.work-image-box img {
+    will-change: transform; /* 告訴瀏覽器準備進行動畫優化 */
+}
+
 .hero-title {
     position: absolute;
     top: 50%;
@@ -179,7 +217,7 @@ h2{
     transform: translate(-50%, -50%);
     z-index: 10;
     color: white;
-    font-family: 'Italiana', serif;
+    font-family: 'Italiana', 'Noto Sans TC', serif;
     font-size: 230px;
     pointer-events: none; /* 讓滑鼠點擊可以穿透文字 */
     white-space: nowrap; /* 文字不換行 */
@@ -216,7 +254,6 @@ h2{
 
 /* 覆寫全域 h2 在此處的樣式 */
 .about-section h2.about-title {
-    font-family: 'Italiana';
     font-size: 64px;
     color: #ffffff;
     padding: 0; /* 移除全域的 100px padding */
@@ -285,7 +322,6 @@ h2{
 }
 
 .service-main-title {
-    font-family: 'Italiana', serif;
     font-size: clamp(48px, 8vw, 64px); /* 字體大小隨螢幕自動縮放 */
     color: white;
     margin-bottom: 60px;
@@ -388,7 +424,6 @@ h2{
 }
 
 .work-main-title {
-    font-family: 'Italiana', serif;
     font-size: 64px;
     color: white;
     margin-bottom: 80px;
@@ -455,7 +490,7 @@ h2{
 
 /* 作品文字資訊 */
 .work-info {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
     font-size: 24px;
     color: white;
 }
@@ -476,7 +511,7 @@ h2{
     text-align: center;
     line-height: 58px;
     text-decoration: none;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
     font-size: 26px;
     border-radius: 10px;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -558,7 +593,7 @@ h2{
 }
 
 .item-info {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
     font-size: 18px; /* 從 24px 降到 18px，更適合三欄佈局 */
     color: white;
     margin: 0;
@@ -567,7 +602,7 @@ h2{
 /* 響應式調整 */
 
 /* 平板版 (Figma < 1280px) */
-/* @media (max-width: 1279px) {
+@media (max-width: 1279px) {
     .portfolio-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 70px 20px;
@@ -577,9 +612,9 @@ h2{
         aspect-ratio: 620 / 403;
     }
 }
-*/
+
 /* 手機版 (Figma < 800px) */
-/* @media (max-width: 799px) {
+@media (max-width: 799px) {
     .portfolio-grid {
         grid-template-columns: 1fr;
         gap: 50px;
@@ -599,7 +634,6 @@ h2{
         text-align: left;
     }
 }
-*/
 
 /* Contact Section 容器重設 */
 .contact-section {
@@ -623,7 +657,6 @@ h2{
 
 /* 左側文字 */
 .contact-title {
-    font-family: 'Italiana';
     font-size: 64px;
     font-weight: normal;
     color: white;
@@ -913,7 +946,7 @@ h2{
 .back-to-work {
     color: white;
     text-decoration: none;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Noto Sans TC', sans-serif;
     border: 1px solid #ffffff;
     padding: 15px 40px;
     border-radius: 30px;
