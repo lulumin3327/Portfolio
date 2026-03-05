@@ -1,0 +1,953 @@
+/* 基礎重設 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #101010;
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+}
+
+h2{
+    font-size: 48px; /* 修改為你想要的大小 */
+    color: white;
+    padding: 100px;
+    font-family: 'Italiana', serif; /* 建議配合你的品牌字體 */
+    text-transform: uppercase; /* 視需求決定是否轉為大寫 */
+}
+
+/* Header 樣式 */
+.navbar {
+    position: relative; /* 這是為了讓 #nav-indicator 相對它定位 */
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+/* 導覽列容器 - 磨砂玻璃效果 */
+.navbar-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.6); /* 修改這裡：白色且透明度 0.6 */
+    backdrop-filter: blur(15px); /* 保持磨砂效果 */
+    color: #000000;
+    border-radius: 26px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav-group {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link, .logo-text {
+    position: relative;
+    z-index: 5; /* 提高層級，確保在藍色塊上面 */
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: #101010; /* 預設為黑色 */
+    transition: color 0.3s ease;
+}
+/*logo*/
+.nav-logo {
+    cursor: pointer;
+    position: relative;
+    padding: 10px 20px;
+    z-index: 2; /* 提高層級，確保在藍色塊上面 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-text {
+    font-family: 'Italiana', serif;
+    color: white;
+    font-size: 20px;
+    z-index: 2;
+    position: relative;
+}
+
+.logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-logo {
+    width: 200px;  
+    height: auto;  
+    display: block;
+    position: relative;
+    z-index: 3;
+    /* 預設維持深色或原本顏色 */
+    filter: brightness(0) saturate(100%) invert(16%) sepia(89%) saturate(6053%) hue-rotate(231deg) brightness(98%) contrast(105%);
+    transition: all 0.3s ease;
+}
+
+/* Active 狀態：維持純白 */
+#logo-button.active .main-logo {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* 滑動長方形 (Selected Indicator) */
+#nav-indicator {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 45px;
+    background-color: #0039F5; 
+    border-radius: 20px;
+    z-index: 1; 
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+    display: block !important; /* 強制顯示 */
+    opacity: 1;
+}
+
+/* 當被選中時，文字變白色才清晰 */
+.nav-link.active, .nav-logo.active .logo-text {
+    color: #ffffff !important; /* 強制變白 */
+}
+
+.lang-btn {
+    background: rgba(16, 16, 16, 0.1);
+    color: #101010;
+    border: 1px solid rgba(16, 16, 16, 0.2);
+    padding: 5px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s;
+    margin-left: 10px;
+}
+
+.lang-btn:hover {
+    background: #0039F5;
+    color: white;
+    border-color: #0039F5;
+}
+
+.hero {
+    height: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* overflow: hidden; 如果你想讓影片不要超出 862px 可以加這行 */
+}
+
+.hero-container {
+    position: relative;
+    width: 530px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    max-width: 530px;
+    object-fit: cover;
+    height: auto;
+    display: block;
+}
+
+.hero-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    color: white;
+    font-family: 'Italiana', serif;
+    font-size: 230px;
+    pointer-events: none; /* 讓滑鼠點擊可以穿透文字 */
+    white-space: nowrap; /* 文字不換行 */
+}
+
+.about-section {
+    width: 100%;
+    height: 765px;
+    background-color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.about-container {
+    width: 100%;
+    max-width: 1280px; 
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* 左側文字區 */
+.about-content {
+    flex: 1;
+    padding-left: 10%;
+    padding-right: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+}
+
+/* 覆寫全域 h2 在此處的樣式 */
+.about-section h2.about-title {
+    font-family: 'Italiana';
+    font-size: 64px;
+    color: #ffffff;
+    padding: 0; /* 移除全域的 100px padding */
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.about-description {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #cccccc;
+    max-width: 450px;
+}
+
+/* 右側圖片區 */
+.about-image {
+    flex: 1;
+    height: 100%;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 確保圖片填滿右半部且不變形 */
+    display: block;
+}
+
+/* 手機版響應式 */
+@media (max-width: 1024px) {
+    .about-section {
+        height: auto;
+        padding: 80px 0;
+    }
+    
+    .about-container {
+        flex-direction: column;
+    }
+
+    .about-content {
+        padding: 0 40px;
+        order: 2; /* 文字排到下面 */
+        margin-top: 40px;
+    }
+
+    .about-image {
+        width: 100%;
+        height: 400px;
+        order: 1; /* 圖片排到上面 */
+    }
+    
+    .about-section h2.about-title {
+        font-size: 48px;
+    }
+}
+/* Service 區塊 - 使用 Grid 重新設計 */
+.service-section {
+    width: 100%;
+    background-color: #101010;
+    padding: 100px 5%; /* 使用百分比 padding 增加縮放彈性 */
+}
+
+.service-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-main-title {
+    font-family: 'Italiana', serif;
+    font-size: clamp(48px, 8vw, 64px); /* 字體大小隨螢幕自動縮放 */
+    color: white;
+    margin-bottom: 60px;
+    padding: 0 !important;
+}
+
+/* 網格核心設定 */
+.service-grid {
+    display: grid;
+    /* 錯誤：grid-template-columns: repeat(12, 1 columns); */
+    grid-template-columns: repeat(12, 1fr); /* 修正為 1fr */
+    grid-template-areas: 
+        "blue blue blue blue blue blue blue blue tall tall tall tall"
+        "light light light light light dark dark dark tall tall tall tall";
+    gap: 20px;
+}
+
+/* 卡片通用設定 */
+.service-card {
+    padding: 40px;
+    color: white;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 4px; /* 稍微加一點點圓角，視覺較不生硬 */
+}
+
+.service-card h3 {
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.service-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* 分配各卡片在網格中的位置 */
+.card-blue { 
+    grid-area: blue; 
+    background-color: #0034e0; 
+}
+.card-tall-gray { 
+    grid-area: tall; 
+    background-color: #7f7f7f; 
+}
+.card-light-gray { 
+    grid-area: light; 
+    background-color: #d9d9d9; 
+    color: #000; 
+}
+.card-light-gray h3 { color: #000; }
+
+.card-dark-gray { 
+    grid-area: dark; 
+    background-color: #4d4d4d; 
+}
+
+/* --- 響應式設定 --- */
+
+/* 平板模式：改為兩欄 */
+@media (max-width: 1024px) {
+    .service-grid {
+        grid-template-areas: 
+            "blue blue"
+            "light dark"
+            "tall tall";
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* 手機模式：改為單欄直排 */
+@media (max-width: 768px) {
+    .service-grid {
+        display: flex;
+        flex-direction: column;
+    }
+    .service-card {
+        min-height: auto;
+    }
+}
+
+/* My Work 區塊容器 */
+.work-section {
+    width: 100%;
+    background-color: #101010;
+    padding: 100px 0;
+    min-height: 1440px;
+    display: flex;
+    justify-content: center;
+}
+
+.work-container {
+    width: 90%;
+    max-width: 1280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.work-main-title {
+    font-family: 'Italiana', serif;
+    font-size: 64px;
+    color: white;
+    margin-bottom: 80px;
+    padding: 0 !important; /* 確保不被全域 h2 影響 */
+}
+
+/* 作品網格 - 2x2 佈局 */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 兩列等寬 */
+    gap: 180px 34px; /* 上下間距較大，左右間距較小 */
+    margin-bottom: 100px;
+}
+
+.work-item {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 作品圖片容器 */
+.work-image-box {
+    position: relative;
+    width: 100%;
+    height: 345px;
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.work-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* 懸停效果：圖片放大與遮罩出現 */
+.work-image-box:hover img {
+    transform: scale(1.1);
+}
+
+.work-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 57, 245, 0.6); /* 你的品牌藍色 */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.work-image-box:hover .work-overlay {
+    opacity: 1;
+}
+
+/* 作品文字資訊 */
+.work-info {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    color: white;
+}
+
+/* See More 按鈕樣式 */
+.see-more-container {
+    display: none; /* 未來有更多作品時才顯示按鈕 display: flex */
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.see-more-btn {
+    display: inline-block;
+    width: 301px;
+    height: 58px;
+    background-color: #0039f5;
+    color: white;
+    text-align: center;
+    line-height: 58px;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.see-more-btn:hover {
+    background-color: #002dbb;
+    transform: translateY(-5px);
+}
+
+/* 響應式：手機版變單列 */
+@media (max-width: 1024px) {
+    .work-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    
+    .work-image-box {
+        height: 250px;
+    }
+}
+
+/* 子頁面背景 */
+.subpage-body {
+    background-color: #101010;
+    margin: 0;
+    padding: 0;
+}
+
+.portfolio-page {
+    padding: 150px 0 100px; /* 預留 Navbar 空間 */
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-title {
+    font-family: 'Italiana', serif;
+    font-size: 64px;
+    color: white;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+}
+
+/* 核心網格系統 */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) !important; /* 強制三欄 */
+    gap: 40px 20px;
+    width: 100%;
+}
+
+.portfolio-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-image-box {
+    width: 100%;
+    aspect-ratio: 16 / 11; /* 稍微扁一點的比例會讓視覺上覺得變小、變精緻 */
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.item-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.item-image-box:hover img {
+    transform: scale(1.05);
+}
+
+.item-info {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px; /* 從 24px 降到 18px，更適合三欄佈局 */
+    color: white;
+    margin: 0;
+}
+
+/* 響應式調整 */
+
+/* 平板版 (Figma < 1280px) */
+/* @media (max-width: 1279px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 70px 20px;
+    } 
+    
+    .item-image-box {
+        aspect-ratio: 620 / 403;
+    }
+}
+*/
+/* 手機版 (Figma < 800px) */
+/* @media (max-width: 799px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .page-title {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .item-image-box {
+        aspect-ratio: 310 / 206;
+        border-radius: 7px;
+    }
+
+    .item-info {
+        font-size: 15px;
+        text-align: left;
+    }
+}
+*/
+
+/* Contact Section 容器重設 */
+.contact-section {
+    width: 100%;
+    min-height: 800px;
+    background-color: #101010;
+    padding: 120px 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-container {
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* 分為左側大文字，右側小資訊 */
+    gap: 60px;
+    position: relative;
+}
+
+/* 左側文字 */
+.contact-title {
+    font-family: 'Italiana';
+    font-size: 64px;
+    font-weight: normal;
+    color: white;
+    margin-bottom: 40px;
+    padding: 0 !important;
+}
+
+.contact-spark {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #ffffff;
+    opacity: 0.9;
+    max-width: 500px;
+}
+
+/* 右側導覽與資訊 */
+.contact-info-grid {
+    display: flex;
+    gap: 80px;
+}
+
+.info-group h3 {
+    font-size: 32px;
+    font-weight: 300;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.info-group ul {
+    list-style: none;
+}
+
+.info-group p, .info-group li {
+    font-size: 16px;
+    color: white;
+    margin-bottom: 12px;
+    font-weight: 300;
+}
+
+.info-group a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.info-group a:hover {
+    color: #0039F5;
+}
+
+/* 社群圖標區 (Frame 6) */
+.social-icons {
+    grid-column: 1 / -1; /* 橫跨整行 */
+    display: flex;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.social-item {
+    position: relative;
+    width: 87px;
+    height: 87px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+/* 鑽石背景設計 */
+.diamond-bg {
+    position: absolute;
+    width: 62px;
+    height: 62px;
+    background-color: #4d4d4d;
+    border-radius: 10px;
+    transform: rotate(45deg);
+    transition: background-color 0.3s, transform 0.3s;
+    z-index: 1;
+}
+
+.social-item img, .social-item svg {
+    position: relative;
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+}
+
+.social-item:hover .diamond-bg {
+    background-color: #0039F5;
+    transform: rotate(45deg) scale(1.1);
+}
+
+/* --- 響應式設定 --- */
+
+/* 平板 (1024px 以下) */
+@media (max-width: 1024px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+    .contact-info-grid {
+        gap: 40px;
+    }
+}
+
+/* 手機 (800px 以下) */
+@media (max-width: 800px) {
+    .contact-title {
+        font-size: 40px;
+    }
+    .contact-info-grid {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+.footer-section {
+    height: 70px;
+    background: #101010;
+    color: white;
+    
+    /* 核心修改：啟動 Flexbox 並設定對齊 */
+    display: flex;           /* 必須啟動此行 */
+    justify-content: center; /* 水平置中 */
+    align-items: center;     /* 垂直置中 */
+    
+    margin-top: 50px;        /* 建議只設定 top，避免影響寬度 */
+    width: 100%;             /* 確保寬度撐滿，文字才好置中 */
+}
+
+.footer-content p {
+    font-size: 14px;
+    opacity: 0.7;
+    margin: 0;               /* 移除 p 標籤預設的上下間距 */
+}
+
+/* 手機版響應式 */
+@media (max-width: 800px) {
+    .hero-title {
+        font-size: 94px;
+    }
+}
+
+
+/* 作品詳情頁專屬樣式 */
+.detail-page {
+    padding-top: 120px;
+    background-color: #101010;
+}
+
+.detail-header {
+    padding: 60px 0;
+    color: white;
+}
+
+.detail-header .container {
+    width: 85%; /* 這裡控制標題的縮排 */
+    max-width: 1100px;
+    margin: 0 auto 40px auto;
+}
+
+.detail-title {
+    font-family: 'Italiana', serif;
+    font-size: 48px; /* 調大一點點更有張力 */
+    color: white;
+}
+
+.detail-meta {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.meta-item span {
+    color: #0039F5; /* 品牌藍 */
+    font-size: 14px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.meta-item p {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.detail-gallery {
+    width: 100%;
+    margin-bottom: 60px; /* 與下方文字的間距 */
+}
+
+.gallery-container {
+    width: 85%;      /* 控制圖片佔螢幕的寬度，你可以改成 80% 或更小 */
+    max-width: 1100px; /* 限制最大寬度，避免在大螢幕上太巨大 */
+    margin: 0 auto;  /* 置中 */
+    display: flex;
+    flex-direction: column;
+    line-height: 0;
+}
+
+.gallery-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+}
+
+.app-image {
+    width: 260px;
+    max-height: 560px;
+    background-color: #000;
+    
+    object-fit: contain;
+    border-radius: 24px;
+    border: 6px solid #222;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.app-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+.app-image.long-screen {
+    width: 260px;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    border-radius: 24px;
+    border: 6px solid #222;
+    display: block;
+}
+
+.app-image:hover {
+    transform: translateY(-10px);
+}
+
+.detail-info-bottom .container {
+    width: 85%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.detail-info-bottom {
+    padding: 40px 0;
+    color: white;
+}
+
+.detail-meta {
+    display: flex;
+    gap: 60px;
+    margin-bottom: 30px;
+}
+
+.meta-item span {
+    color: #0039F5;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.meta-item p {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+/* 底部按鈕 */
+.detail-footer {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.detail-description {
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 600px;
+    color: #aaaaaa;
+}
+
+.back-to-work {
+    color: white;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #ffffff;
+    padding: 15px 40px;
+    border-radius: 30px;
+    transition: all 0.3s;
+}
+
+.back-to-work:hover {
+    background-color: #0039F5;
+    border-color: #0039F5;
+}
+
+/* 移除超連結預設底線並確保顏色正確 */
+.work-link {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* 整個區域都可點擊 */
+}
+
+/* 確保圖片縮放效果依然有效 */
+.work-link:hover .work-image-box img {
+    transform: scale(1.1);
+}
+
+.work-link:hover .work-overlay {
+    opacity: 1;
+}
+
+/* 響應式 */
+@media (max-width: 768px) {
+    .gallery-container, .detail-header .container, .detail-info-bottom .container {
+        width: 90%; /* 手機版佔寬一點 */
+    }
+    .detail-meta {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

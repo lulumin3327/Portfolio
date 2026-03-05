@@ -1,0 +1,169 @@
+body{background: #FFECB3; margin:0; padding:0; color:black;
+font-family: Raleway, sans-serif;}
+
+.homepage{border:1px solid; width:100%; height:70px; background: #F48FB1; padding:0px 0px 15px 0px; display:flex; align-items:center; justify-content:space-between;}
+
+.web{display:flex; margin:10px; padding:5px;color:#3E2723; border-radius:30px;}
+.webname{font-size:160%; padding:10px;
+font-family: "Open Sans", sans-serif;}
+
+.choco{overflow:hidden; width:50px; height:50px; display:inline-block;  transform: translate(-10px, 0px); scale:130%}
+.chocoicon{width:110%; height:110%; display:inline-block; object-fit:cover;}
+
+.search{display: inline-block; background-color:#F8BBD0; width:400px; height: 40px; border-radius:30px; transform:translate(0px, 5px);}
+.icons{width:40px; height:40px; scale:70%;  overflow:hidden; display:inline-block; transform:translate(0px, 10px);}
+
+.right-icon{display:flex; gap:10px; padding:10px;}
+.icona{width:40px; height:40px; overflow:hidden; display:inline-block;}
+.icon{width:100%; height:100%; display: inline-block; object-fit:contain;}
+
+.catpicbox{width:100%; height:500px; position: relative;}
+.cati{height:100%; width:100%; overflow:hidden;}
+.catpic{width:100%; height:100%; object-fit: cover;}
+
+.slogan{background-color:white; margin:30px 0px 0px 0px; padding:5px 0px 5px 30px; font-size:350%; width:100%; position:absolute;}
+
+.Shopcata{background-color:white; padding:20px; margin:150px 0px 70px 0px; width:80%; font-size:200%; text-align:center; border-radius:50px;}
+
+/* Cata外框容器 */
+.catabox {
+  display: inline-block;
+  position: relative;
+  width: 270px;
+  height: 270px;
+  margin: 10px;
+}
+
+.catabox:hover{transform:rotate(5deg);}
+
+/* 圖片 */
+.cata1, .cata2, .cata3, .cata4 {
+  width: 270px;
+  height: 270px;
+  display: inline-block;
+  background-size: 130%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius:30px;
+}
+
+/* 圖片來源 */
+.cata1 { background-image:url('https://i.postimg.cc/sDHKsFxN/2d636a3cbedfc8d29e3e0661f4972fd7.jpg');
+background-size:150%;}
+.cata2 { background-image:url('https://i.postimg.cc/kMyv14Hx/59971ea50c6667c74affa0f6ef2e1d25.jpg');
+background-size:110%; }
+.cata3 { background-image:url('https://i.postimg.cc/prwtgZGd/3278aecdb45bc818e5c74164c19471c9.jpg');
+background-size:100%; }
+.cata4 {background-image:url('https://i.postimg.cc/430wbNWz/498175815d14e089d9c99be91d226868.jpg');
+background-size:130%; }
+
+
+
+/* 文字框 */
+.bk {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 270px;
+  background-color: white;
+  font-size: 170%;
+  text-align: center;
+  padding: 5px 0;
+  box-sizing: border-box;
+  border-radius:0px 0px 30px 30px;
+}
+
+.trending{background-color:white; padding:20px; margin:150px 0px 70px 0px; border-radius:50px; font-size:200%; width:80%; text-align:center;}
+
+.prd1, .prd2, .prd3{
+display:inline-block; border-radius:50px; margin:10px; padding:10px; width:250px; height:350px; 
+background-repeat:no-repeat;
+background-position:center;
+}
+
+/* prd圖片來源 */
+.prd1{background-image:url('https://i.postimg.cc/bJPbVd3J/84083d077e7acb7eccc863d4b559bebc.jpg'); background-size:100%; }
+
+.prd2{background-image:url('https://i.postimg.cc/SKwPj0k8/c007f84f302e277832fbfcdc4225cd9a.jpg'); background-size:140%}
+
+.prd3{background-image:url('https://i.postimg.cc/xd22FbNB/8de83c5936a7a0068c24341455babd59.jpg'); background-size:105%}
+
+.shop{background-color: #F48FB1; color:white; padding:10px; margin:80px 0px 150px 0px; border-radius: 50px; font-size:220%; width:400px; text-align:center;}
+
+.shop:hover{background-color:#E91E63;}
+
+.client{background-color: white; padding:20px; margin:150px 0px 70px 0px; border-radius:50px; font-size:200%; width:80%; text-align:center;}
+
+/* feedback外框容器 */
+.feedbox{
+ background-color:white; display:inline-block; position:relative; width:250px; height:200px; margin:10px; border-radius:30px;
+}
+
+/* feedback名字 */
+.name{background-color:#F06292; color:white; padding:10px 10px 10px 25px; text-align:left; font-size: 130%; border-radius:30px 30px 0px 0px;}
+
+.feed{margin:10px 0px 0px 0px; padding: 0px 0px 0px 10px; text-align:left; font-size:110%}
+
+.shoptitle{background-color:white ; color:black; padding:10px; margin:120px 0px 50px 0px; border-radius: 50px; font-size:220%; width:400px; text-align:center;}
+
+
+/*prd容器*/
+.prdbox{
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 10px;}
+
+.prdbox:hover{border:4px solid #F06292; border-radius:30px;}
+
+/*文字框*/
+.wd{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  background-color: white;
+  font-size: 130%;
+  text-align: center;
+  padding: 5px 0;
+  box-sizing: border-box;
+  border-radius:0px 0px 30px 30px;
+}
+
+.foodpic1, .foodpic2, .foodpic3,
+ .bedpic1, .bedpic2, .bedpic3,
+ .litterpic1, .litterpic2, .litterpic3,
+ .toypic1, .toypic2, .toypic3{
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  background-size: 130%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius:30px;
+}
+
+.foodpic1{background-image:url('https://i.postimg.cc/LXpL4Gcf/1c845574142a1f2c1ed4d86c95f0be42.jpg'); background-size:160%; }
+
+.foodpic2{background-image:url('https://i.postimg.cc/65Y0j6DP/c8f51d3c72cfae3be1d680189c69e79b.jpg'); background-size:100%; }
+
+.foodpic3{background-image:url('https://i.postimg.cc/zGvk9ZNG/a0316e261a7bdd2ba0f44971f9ca56d0.jpg'); background-size:150%; }
+
+.bedpic1{background-image:url('https://i.postimg.cc/fRdV3Bjv/d5184824442cf27a7d19808103bcc8c3.jpg'); background-size:100%; }
+
+.bedpic2{background-image:url('https://i.postimg.cc/FKQ703TX/0578f036d76ad5e71c64418a0aaba724.jpg'); background-size:100%; }
+
+.bedpic3{background-image:url('https://i.postimg.cc/wvqMGHKW/95e3f6c1009efeab3f0e5aad721ac939.jpg'); background-size:100%; }
+
+.litterpic1{background-image:url('https://i.postimg.cc/QdcMNVh4/89d79eb6c8231c1238ec16a2c3e543b2.jpg'); background-size:100%; }
+
+.litterpic2{background-image:url('https://i.postimg.cc/GpQhYNBv/1b8a31a3a126e32038a64342fa03b9bb.jpg'); background-size:100%; }
+
+.litterpic3{background-image:url('https://i.postimg.cc/JnYrYk5n/818ab3412ea9c63a44c2fe2bf107043d.jpg'); background-size:100%; }
+
+.toypic1{background-image:url('https://i.postimg.cc/m2mrtKHM/71b7dcd60763389dd3026ccd9febcd70.jpg'); background-size:100%;}
+
+.toypic2{background-image:url('https://i.postimg.cc/CxdxDJG2/f03944d359c0b8e9d8d3d8223bff8901.jpg'); background-size:100%;}
+
+.toypic3{background-image:url('https://i.postimg.cc/mrCRNntm/60ab7811ec818c4220e40b8e534ba7bd.jpg'); background-size:100%;}
