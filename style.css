@@ -19,27 +19,28 @@ h2{
     text-transform: uppercase; /* 視需求決定是否轉為大寫 */
 }
 
-/* 1. 基礎語言隱藏（加上 !important 確保不被後續 layout 影響） */
-.lang-en, .lang-zh { 
-    display: none !important; 
+:root {
+    --primary-blue: #0039F5;
+    --bg-dark: #101010;
+    --text-white: #ffffff;
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* 1. 基礎語言隱藏（加上 !important 確保不被後續 layout 影響） */
+.lang-en, .lang-zh { display: none; }
 
 /* 2. 預設模式（非英文模式）：顯示中文 */
-body:not(.en-mode) .lang-zh { 
-    display: block !important; 
-}
-/* 如果是 flex 容器（如 overlay），需特別指定 */
-body:not(.en-mode) .work-overlay.lang-zh { 
-    display: flex !important; 
-}
+body.en-mode .lang-en { display: block; }
+body:not(.en-mode) .lang-zh { display: block; }
 
-/* 3. 英文模式：顯示英文 */
-body.en-mode .lang-en { 
-    display: block !important; 
-}
-/* 如果是 flex 容器（如 overlay），需特別指定 */
-body.en-mode .work-overlay.lang-en { 
-    display: flex !important; 
+/* 若是 Flex 容器則需對應修改 */
+body.en-mode .work-overlay.lang-en,
+body:not(.en-mode) .work-overlay.lang-zh {
+    display: flex;
 }
 
 /* Header 樣式 */
@@ -50,6 +51,7 @@ body.en-mode .work-overlay.lang-en {
     justify-content: space-between; /* 改為兩端對齊 */
     width: 100%;
     padding: 0 20px;
+    gap: 15px;
 }
 
 /* 讓整體 header 區域固定在頂部 */
@@ -72,7 +74,8 @@ body.en-mode .work-overlay.lang-en {
     width: fit-content; /* 寬度根據內容自適應 */
     min-width: 700px;   /* 設定一個最小寬度防止太擠 */
     max-width: 900px;
-    height: 60px;
+    height: 50px;
+    padding: 0 30px;
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -110,12 +113,11 @@ body.en-mode .work-overlay.lang-en {
 
 /* 修正文字偏上的問題 */
 .nav-link {
-    display: inline-flex;
-    align-items: center;
-    padding: 0 10px;      /* 增加一點點點擊範圍 */
-    position: relative;
+    padding: 8px 15px;
+    font-size: 14px;
+    color: #2b2b2b;
     z-index: 5;
-    transition: color 0.3s ease, width 0.3s ease;
+    text-decoration: none;
 }
 
 /*logo*/
@@ -126,6 +128,7 @@ body.en-mode .work-overlay.lang-en {
     padding: 0 40px;
     z-index: 2;
     display: flex;
+    text-decoration: none;
     align-items: center;
     justify-content: center;
     flex: 0 0 auto; /* LOGO 不伸縮 */
@@ -164,17 +167,12 @@ body.en-mode .work-overlay.lang-en {
 /* 滑動長方形 (Selected Indicator) */
 #nav-indicator {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 45px;
-    background-color: #0039F5; 
+    height: 40px; /* 統一高度 */
+    background-color: var(--primary-blue);
     border-radius: 20px;
-    z-index: 1; 
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    will-change: left, width;
+    z-index: 1;
+    transition: var(--transition-smooth);
     pointer-events: none;
-    display: block !important; /* 強制顯示 */
-    opacity: 1;
 }
 
 /* 當被選中時，文字變白色才清晰 */
@@ -184,16 +182,27 @@ body.en-mode .work-overlay.lang-en {
 
 @media (max-width: 768px) {
     .header-wrapper {
-        padding: 0 15px;
+        padding: 0 10px;
+        top: 10px; /* 靠頂部一點 */
     }
     .navbar-container {
-        min-width: unset;
-        width: 80%;
+        min-width: 95%; /* 佔據螢幕寬度 */
+        padding: 0 10px;
     }
+    .nav-group {
+        gap: 5px; /* 縮小文字間的間距 */
+    }
+    .nav-link {
+        font-size: 11px; /* 縮小字體以塞進螢幕 */
+        padding: 5px 8px;
+    }
+
+    .main-logo {
+        width: 120px; /* 縮小 LOGO */
+    }
+
     .lang-btn-container {
-        right: 15px;
-        width: 50px;
-        height: 50px;
+        display: none; /* 手機版如果太擠，可以先隱藏或移至角落 */
     }
 }
 
