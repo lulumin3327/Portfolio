@@ -1,153 +1,79 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. 定義常數與變數 ---
     const indicator = document.getElementById('nav-indicator');
     const navLinks = document.querySelectorAll('.nav-link');
     const logoButton = document.getElementById('logo-button');
-    const sections = document.querySelectorAll('section');
-    const langBtn = document.getElementById("lang-switch");
-    
-    let isManualScrolling = false;
+    const navContainer = document.querySelector('.navbar-container');
+    const langSwitchBtn = document.getElementById('lang-switch');
 
-    // --- 2. 語言切換邏輯 ---
-    let currentLang = localStorage.getItem("preferredLang") || "ZH";
-    
-    function applyLanguage(lang) {
-        if (!langBtn) return;
-        langBtn.textContent = lang === "ZH" ? "EN" : "繁中";
-        
-        const zhElements = document.querySelectorAll(".lang-zh");
-        const enElements = document.querySelectorAll(".lang-en");
-
-        // 1. 切換顯示/隱藏
-        if (lang === "EN") {
-            zhElements.forEach(el => el.style.display = "none");
-            enElements.forEach(el => el.style.display = "inline-block");
-        } else {
-            zhElements.forEach(el => el.style.display = "inline-block");
-            enElements.forEach(el => el.style.display = "none");
-        }
-
-        // 2. 修正「隱藏元素」帶有 active 類別的問題
-        document.querySelectorAll('.nav-link.active').forEach(link => {
-            const href = link.getAttribute('href');
-            // 找出目前「非隱藏」的對應連結
-            const visibleLink = document.querySelector(`.nav-link[href="${href}"]:not([style*="display: none"])`);
-            if (visibleLink && visibleLink !== link) {
-                link.classList.remove('active');
-                visibleLink.classList.add('active');
-            }
-        });
-
-        // 3. 重新同步位置
-        setTimeout(syncIndicator, 50);
-    }
-
-    if (langBtn) {
-        langBtn.addEventListener("click", () => {
-            currentLang = currentLang === "ZH" ? "EN" : "ZH";
-            localStorage.setItem("preferredLang", currentLang);
-            applyLanguage(currentLang);
-        });
-    }
-
-    // 初始化語言
-    applyLanguage(currentLang);
-
-    // --- 3. 導覽滑塊更新邏輯 ---
-    function updateIndicator(element) {
+    // --- 1. 統一移動 Indicator 的函數 ---
+    function moveIndicator(element) {
         if (!element || !indicator) return;
         
-        // 如果元素被隱藏了（寬度為0），不更新，避免滑塊飛走
-        if (element.offsetWidth === 0) return;
-
-        // 移除舊的 active 類別
-        navLinks.forEach(link => link.classList.remove('active'));
-        if (logoButton) logoButton.classList.remove('active');
-        
-        // 加入新的 active 類別
-        element.classList.add('active');
-
-        // 計算位置
+        // 取得目標元素的位置資訊
         const rect = element.getBoundingClientRect();
-        const navRect = document.querySelector('.navbar').getBoundingClientRect();
-        const relativeLeft = rect.left - navRect.left;
+        const navRect = navContainer.getBoundingClientRect();
+
+        // 核心邏輯：計算相對於 navbar-container 的位置
+        // 如果是隱藏狀態的元素，getBoundingClientRect() 會是 0，這裡要確保選中顯示中的那個
+        if (rect.width === 0) return; 
+
+        indicator.style.width = `${rect.width + 20}px`;
+        indicator.style.left = `${rect.left - navRect.left - 10}px`;
+        indicator.style.opacity = "1"; 
         
-        const padding = 20; 
-        indicator.style.width = `${rect.width + padding}px`;
-        indicator.style.left = `${relativeLeft - (padding / 2)}px`;
-        indicator.style.opacity = "1";
+        // 移除所有人的 active 狀態
+        navLinks.forEach(link => link.classList.remove('active'));
+        logoButton.classList.remove('active');
+        
+        // 給當前元素加上 active
+        element.classList.add('active');
     }
 
-    function syncIndicator() {
-        // 優先找顯示中的 active 連結，若無則預設到 logo
-        const activeEl = document.querySelector('.nav-link.active:not([style*="display: none"])') || logoButton;
-        updateIndicator(activeEl);
-    }
-
-    window.addEventListener('resize', syncIndicator);
-
-    // --- 4. 點擊與平滑捲動 ---
-    const handleNavClick = (e, targetEl, scrollTarget) => {
-        e.preventDefault();
-        isManualScrolling = true;
-        updateIndicator(targetEl);
+    // --- 2. 語言切換邏輯 ---
+    langSwitchBtn.addEventListener('click', () => {
+        // 切換 body 的 class
+        const isEnMode = document.body.classList.toggle('en-mode');
         
-        window.scrollTo({
-            top: scrollTarget,
-            behavior: 'smooth'
-        });
+        // 更新按鈕文字
+        langSwitchBtn.textContent = isEnMode ? 'ZH' : 'EN';
 
-        // 確保滾動結束後才恢復自動監聽
-        setTimeout(() => { isManualScrolling = false; }, 800);
-    };
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href.startsWith('#')) {
-                const targetElement = document.getElementById(href.substring(1));
-                if (targetElement) {
-                    handleNavClick(e, this, targetElement.offsetTop - 80);
-                }
-            }
-        });
+        // 語言切換後，導覽列文字寬度會變，需要重新計算 Indicator 位置
+        // 我們找目前帶有 .active 的元素重新對準一次
+        setTimeout(() => {
+            const activeLink = document.querySelector('.nav-link.active') || logoButton;
+            moveIndicator(activeLink);
+        }, 10); // 微小延遲確保 CSS 已渲染
     });
 
-    if (logoButton) {
-        logoButton.addEventListener('click', (e) => {
-            handleNavClick(e, logoButton, 0);
-        });
-    }
-
-    // --- 5. Intersection Observer (解決重複宣告錯誤) ---
+    // --- 3. 滾動偵測邏輯 ---
+    const sections = document.querySelectorAll('section');
     const observerOptions = {
         root: null,
-        rootMargin: '-20% 0px -70% 0px', // 讓偵測區間靠近視窗頂部
+        rootMargin: '-40% 0px -40% 0px', // 調整偵測區間
         threshold: 0
     };
 
     const observer = new IntersectionObserver((entries) => {
-        if (isManualScrolling) return;
-
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const id = entry.target.getAttribute('id');
-                let target;
-                if (id === 'home' || !id) {
-                    target = logoButton;
+                
+                if (id === 'home') {
+                    moveIndicator(logoButton);
                 } else {
-                    // 關鍵修正：只選取「當前顯示中」的語系連結
-                    target = document.querySelector(`.nav-link[href="#${id}"]:not([style*="display: none"])`);
+                    // 根據當前語言模式，找到對應區塊的 nav-link
+                    const isEn = document.body.classList.contains('en-mode');
+                    const targetLink = document.querySelector(`.nav-link[href="#${id}"].lang-${isEn ? 'en' : 'zh'}`);
+                    if (targetLink) moveIndicator(targetLink);
                 }
-                if (target) updateIndicator(target);
             }
         });
     }, observerOptions);
 
-    sections.forEach(section => {
-        if (section) observer.observe(section);
-    });
+    sections.forEach(section => observer.observe(section));
 
-    // --- 6. 初始化位置 ---
-    window.addEventListener('load', syncIndicator);
+    // 點擊 Logo 回到頂部
+    logoButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 });

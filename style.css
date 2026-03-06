@@ -14,9 +14,32 @@ body {
 h2{
     font-size: 48px; /* 修改為你想要的大小 */
     color: white;
-    padding: 100px;
+    padding: 40px 0;
     font-family: 'Italiana', 'Noto Sans TC', serif;
     text-transform: uppercase; /* 視需求決定是否轉為大寫 */
+}
+
+/* 1. 基礎語言隱藏（加上 !important 確保不被後續 layout 影響） */
+.lang-en, .lang-zh { 
+    display: none !important; 
+}
+
+/* 2. 預設模式（非英文模式）：顯示中文 */
+body:not(.en-mode) .lang-zh { 
+    display: block !important; 
+}
+/* 如果是 flex 容器（如 overlay），需特別指定 */
+body:not(.en-mode) .work-overlay.lang-zh { 
+    display: flex !important; 
+}
+
+/* 3. 英文模式：顯示英文 */
+body.en-mode .lang-en { 
+    display: block !important; 
+}
+/* 如果是 flex 容器（如 overlay），需特別指定 */
+body.en-mode .work-overlay.lang-en { 
+    display: flex !important; 
 }
 
 /* Header 樣式 */
@@ -29,20 +52,31 @@ h2{
     padding: 0 20px;
 }
 
-/* 導覽列容器 - 磨砂玻璃效果 */
-.navbar-container {
+/* 讓整體 header 區域固定在頂部 */
+.header-wrapper {
     position: fixed;
     top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 800px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.6); /* 修改這裡：白色且透明度 0.6 */
-    backdrop-filter: blur(15px); /* 保持磨砂效果 */
-    color: #000000;
-    border-radius: 26px;
+    left: 0;
+    width: 100%;
     z-index: 1000;
+    pointer-events: none; /* 讓容器不阻擋下方點擊，內層元件再開回來 */
+    display: flex;
+    justify-content: center; /* 讓主選單置中 */
+    align-items: center;
+    padding: 0 40px; /* 左右留間距 */
+}
+
+/* 主選單容器 */
+.navbar-container {
+    pointer-events: auto; /* 開啟點擊 */
+    width: fit-content; /* 寬度根據內容自適應 */
+    min-width: 700px;   /* 設定一個最小寬度防止太擠 */
+    max-width: 900px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,9 +84,8 @@ h2{
 
 .nav-group {
     display: flex;
-    gap: 20px;
-    flex: 1; /* 核心修改：平分剩餘空間 */
-    align-items: center; /* 確保文字垂直居中 */
+    align-items: center;
+    gap: 20px
 }
 
 .nav-group.right {
@@ -60,7 +93,7 @@ h2{
 }
 
 .nav-group.left {
-    justify-content: center; /* 左側組中間對齊 */
+    justify-content: center; 
 }
 
 .nav-link, .logo-text {
@@ -77,10 +110,12 @@ h2{
 
 /* 修正文字偏上的問題 */
 .nav-link {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    line-height: 1; /* 統一行高 */
-    height: 100%;
+    padding: 0 10px;      /* 增加一點點點擊範圍 */
+    position: relative;
+    z-index: 5;
+    transition: color 0.3s ease, width 0.3s ease;
 }
 
 /*logo*/
@@ -88,7 +123,7 @@ h2{
 .nav-logo {
     cursor: pointer;
     position: relative;
-    padding: 0 20px;
+    padding: 0 40px;
     z-index: 2;
     display: flex;
     align-items: center;
@@ -123,7 +158,7 @@ h2{
 
 /* Active 狀態：維持純白 */
 #logo-button.active .main-logo {
-    filter: brightness(0) invert(1) !important;
+    filter: brightness(0) invert(1) !important; /* 變白色 */
 }
 
 /* 滑動長方形 (Selected Indicator) */
@@ -136,6 +171,7 @@ h2{
     border-radius: 20px;
     z-index: 1; 
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: left, width;
     pointer-events: none;
     display: block !important; /* 強制顯示 */
     opacity: 1;
@@ -146,29 +182,61 @@ h2{
     color: #ffffff !important; /* 強制變白 */
 }
 
-@media (max-width: 600px) {
-    .nav-group { gap: 10px; }
-    .nav-link { font-size: 12px; }
-    .main-logo { width: 120px; }
+@media (max-width: 768px) {
+    .header-wrapper {
+        padding: 0 15px;
+    }
+    .navbar-container {
+        min-width: unset;
+        width: 80%;
+    }
+    .lang-btn-container {
+        right: 15px;
+        width: 50px;
+        height: 50px;
+    }
 }
 
+/* 獨立按鈕容器：定位在最右邊 */
+.lang-btn-container {
+    pointer-events: auto;
+    position: fixed; /* 相對於 .header-wrapper 定位 */
+    right: 40px;       /* 距離右側距離 */
+    top: 20px;
+    height: 60px;
+    width: 60px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    z-index: 1100;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 按鈕樣式 */
 .lang-btn {
-    background: rgba(16, 16, 16, 0.1);
+    background: transparent; /* 背景透明，因為容器已有磨砂 */
+    border: none;
     color: #101010;
-    border: 1px solid rgba(16, 16, 16, 0.2);
-    padding: 5px 12px;
-    border-radius: 15px;
     cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
-    transition: all 0.3s;
-    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    z-index: 1101;
 }
 
-.lang-btn:hover {
+.lang-btn-container:hover {
     background: #0039F5;
+}
+.lang-btn-container:hover .lang-btn {
     color: white;
-    border-color: #0039F5;
 }
 
 .hero {
@@ -218,7 +286,7 @@ h2{
     z-index: 10;
     color: white;
     font-family: 'Italiana', 'Noto Sans TC', serif;
-    font-size: 230px;
+    font-size: clamp(80px, 15vw, 300px);
     pointer-events: none; /* 讓滑鼠點擊可以穿透文字 */
     white-space: nowrap; /* 文字不換行 */
 }
@@ -331,8 +399,7 @@ h2{
 /* 網格核心設定 */
 .service-grid {
     display: grid;
-    /* 錯誤：grid-template-columns: repeat(12, 1 columns); */
-    grid-template-columns: repeat(12, 1fr); /* 修正為 1fr */
+    grid-template-columns: repeat(12, 1fr); /* 這裡原本寫錯了 */
     grid-template-areas: 
         "blue blue blue blue blue blue blue blue tall tall tall tall"
         "light light light light light dark dark dark tall tall tall tall";
@@ -468,20 +535,24 @@ h2{
 }
 
 .work-overlay {
-    position: absolute;
+    position: absolute; /* 確保它覆蓋整個父容器 */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 57, 245, 0.6); /* 你的品牌藍色 */
+    background: rgba(0, 57, 245, 0.6); 
     color: white;
+    
+    /* 核心居中設定 */
     display: flex;
     justify-content: center;
     align-items: center;
+    
     font-size: 20px;
     font-weight: 600;
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none; /* 避免文字干擾滑鼠點擊 */
 }
 
 .work-image-box:hover .work-overlay {
