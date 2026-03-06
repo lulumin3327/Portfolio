@@ -180,29 +180,120 @@ body:not(.en-mode) .work-overlay.lang-zh {
     color: #ffffff !important; /* 強制變白 */
 }
 
+/* --- 桌機版基礎微調 (確保原本 layout 不動) --- */
+.nav-menu-wrapper { display: flex; align-items: center; }
+.mobile-controls { display: none; } /* 桌機隱藏手機控制項 */
+
+/* --- 手機版重構 --- */
 @media (max-width: 768px) {
     .header-wrapper {
-        padding: 0 10px;
-        top: 10px; /* 靠頂部一點 */
+        position: absolute; /* 取消 Fixed，隨頁面捲動 */
+        top: 15px;
+        padding: 0 15px;
+        pointer-events: auto;
     }
+
     .navbar-container {
-        min-width: 95%; /* 佔據螢幕寬度 */
-        padding: 0 10px;
-    }
-    .nav-group {
-        gap: 5px; /* 縮小文字間的間距 */
-    }
-    .nav-link {
-        font-size: 11px; /* 縮小字體以塞進螢幕 */
-        padding: 5px 8px;
+        width: 100%;
+        min-width: unset;
+        height: 50px;
+        border-radius: 40px;
+        padding: 0, 8px;
+        justify-content: space-between; /* 讓 Logo 與控制區分開 */
     }
 
+    .navbar {
+        padding: 0;
+        justify-content: space-between;
+    }
+
+    /* Logo 靠左且藍底白字樣式 */
+    .nav-logo {
+        padding: 8px 15px;
+        background-color: var(--primary-blue);
+        border-radius: 20px;
+        order: 1;
+    }
     .main-logo {
-        width: 120px; /* 縮小 LOGO */
+        width: 80px;
+        filter: brightness(0) invert(1) !important; /* 強制變白 */
     }
 
+    /* 隱藏桌機指示器 */
+    #nav-indicator { display: none !important; }
+
+    /* 手機控制區 (語言+漢堡) */
+    .mobile-controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        order: 2;
+    }
+
+    /* 語言切換按鈕樣式 */
+    .mobile-lang-btn {
+        background: none;
+        border: 1px solid #101010;
+        border-radius: 15px;
+        padding: 4px 10px;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* 漢堡選單圖示 (純 CSS) */
+    .hamburger-menu {
+        width: 24px;
+        height: 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+    .hamburger-menu span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #101010;
+        transition: 0.3s;
+    }
+
+    /* 導覽選單展開樣式 */
+    .nav-menu-wrapper {
+        display: none; /* 預設隱藏 */
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        z-index: 999;
+    }
+
+    .nav-menu-wrapper.active {
+        display: flex; /* 點擊後顯示 */
+    }
+
+    .nav-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .nav-link {
+        font-size: 18px;
+        padding: 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* 隱藏原本懸浮在右下的語言按鈕 */
     .lang-btn-container {
-        display: none; /* 手機版如果太擠，可以先隱藏或移至角落 */
+        display: none;
     }
 }
 
