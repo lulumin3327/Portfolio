@@ -5,10 +5,11 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
     background-color: #101010;
     font-family: 'Arial', 'Noto Sans TC', sans-serif;
     overflow-x: hidden;
+    max-width: 100%;
 }
 
 h2{
@@ -203,20 +204,21 @@ body:not(.en-mode) .work-overlay.lang-zh {
 .nav-menu-wrapper { display: flex; align-items: center; }
 .mobile-controls { display: none; } /* 桌機隱藏手機控制項 */
 
-/* --- 手機版重構 --- */
+/* --- 手機版 --- */
 @media (max-width: 768px) {
     .header-wrapper {
         top: 4px;
         left: 0;
         right: 0;
         width: 100%;
-        padding: 0 8px; /* 減少左右內距，防止推擠 */
+        padding: 0 8px;
         z-index: 1000;
-        pointer-events: none; /* 確保背後的內容可以點擊 */
+        pointer-events: none;
+        box-sizing: border-box;
     }
 
     .lang-switch-btn {
-    display: none;
+        display: none;
     }
 
     .navbar-container {
@@ -224,47 +226,53 @@ body:not(.en-mode) .work-overlay.lang-zh {
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         width: 100%;
-        min-width: unset;
-        height: 53px;
+        max-width: 100%;
+        min-width: 0;
+        height: auto;
+        min-height: 50px;
         border-radius: 26px;
-        padding: 0 6px; /* 內部元件離邊緣再縮一點 */
-        pointer-events: auto; /* 讓導覽列恢復點擊 */
+        padding: 6px 10px;
+        pointer-events: auto;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        box-sizing: border-box;
     }
 
     .navbar {
         padding: 0;
+        width: 100%;
+        display: flex;
         justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        gap: 0;
     }
 
-    /* Logo 靠左且藍底白字樣式 */
     .nav-logo {
-        padding: 10px 10px;
+        padding: 6px 12px;
         background-color: var(--primary-blue);
         border-radius: 20px;
-        transform: scale(1.5); /* 核心關鍵：將 Logo 整體放大，突破 header 高度限制 */
-        transform-origin: left center;
-        order: 1;
+        transform: none;
+        flex-shrink: 0;
+        max-width: 60%;
     }
+    
     .main-logo {
-        width: 65px;
-        filter: brightness(0) invert(1) !important; /* 強制變白 */
+        width: 80px;
+        height: auto;
+        display: block;
+        filter: brightness(0) invert(1) !important;
     }
 
-    /* 隱藏桌機指示器 */
     #nav-indicator { display: none !important; }
 
-    /* 手機控制區 (語言+漢堡) */
     .mobile-controls {
         display: flex;
         align-items: center;
-        gap: 15px;
-        order: 2;
+        gap: 10px;
+        flex-shrink: 0;
     }
 
-    /* 語言切換按鈕樣式 */
     .mobile-lang-btn {
         background: none;
         border: 1px solid #101010;
@@ -273,17 +281,20 @@ body:not(.en-mode) .work-overlay.lang-zh {
         font-size: 13px;
         font-weight: bold;
         cursor: pointer;
+        white-space: nowrap;
     }
 
     .hamburger-menu {
         width: 18px;
         height: 12px;
-        margin: 0 10px 0 0;
+        margin: 0 4px 0 0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         cursor: pointer;
+        flex-shrink: 0;
     }
+
     .hamburger-menu span {
         display: block;
         width: 100%;
@@ -292,14 +303,13 @@ body:not(.en-mode) .work-overlay.lang-zh {
         transition: 0.3s;
     }
 
-    /* 導覽選單展開樣式 */
     .nav-menu-wrapper {
-        display: none; /* 預設隱藏 */
+        display: none;
         position: fixed;
         top: 65px;
-        left: 8px;     /* 與 header-wrapper 的 padding 保持一致 */
+        left: 8px;
         right: 8px;
-        width: calc(100% - 20px); /* 扣除左右邊距，使其置中 */
+        width: calc(100% - 16px);
         background: rgba(255, 255, 255, 0.6); 
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
@@ -308,10 +318,11 @@ body:not(.en-mode) .work-overlay.lang-zh {
         border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         z-index: 999;
+        box-sizing: border-box;
     }
 
     .nav-menu-wrapper.active {
-        display: flex; /* 點擊後顯示 */
+        display: flex;
     }
 
     .nav-group {
@@ -327,7 +338,6 @@ body:not(.en-mode) .work-overlay.lang-zh {
         text-align: center;
     }
 
-    /* 隱藏原本懸浮在右下的語言按鈕 */
     .lang-btn-container {
         display: none;
     }
