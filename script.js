@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('en-mode');
         }
         
+        // 更新按鈕文字：在英文模式下顯示 "ZH"，中文模式下顯示 "EN"
         const newText = isEn ? 'ZH' : 'EN';
         if (langSwitchBtn) langSwitchBtn.textContent = newText;
         if (mobileLangBtn) mobileLangBtn.textContent = newText;
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             const activeItem = document.querySelector('.nav-link.active') || logoButton;
             moveIndicator(activeItem);
-        }, 50);
+        }, 100);
     }
 
     // --- B. 事件監聽 (桌機 + 通用) ---
@@ -58,15 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
     allNavItems.forEach(item => {
         item.addEventListener('click', (e) => {
             if (item.id === 'logo-button') {
-                // 如果點擊 Logo 回到頂部
-                if (window.location.hash && window.location.hash !== '#home') {
-                    // 若在子頁面或有 hash 則讓它自然跳轉，否則 smooth scroll
-                } else {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    setActive(logoButton);
-                }
+                // 點擊 Logo 回到頂部
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setActive(logoButton);
             } else {
+                // 點擊連結，setActive 會交給後續的 Scroll Spy 處理，但點擊時先給予視覺反饋
                 setActive(item);
             }
         });
@@ -112,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const observerOptions = {
         root: null,
-        rootMargin: '-40% 0px -40% 0px', // 偵測區塊進入視窗中心區域
+        rootMargin: '-45% 0px -45% 0px', // 稍微縮小偵測範圍，提高準確度
         threshold: 0
     };
 
@@ -124,13 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (targetLink) {
                     setActive(targetLink);
-                } else if (window.scrollY < 200) { 
-                    setActive(logoButton);
                 }
             }
         });
     }, observerOptions);
 
+    // 監聽所有 section 與 header 區塊
     const sections = document.querySelectorAll('section[id], header[id]');
     sections.forEach(section => observer.observe(section));
 
@@ -139,22 +136,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.scrollY < 100) {
             setActive(logoButton);
         }
-    });
+    }, { passive: true });
 
     // --- E. 初始化與視窗縮放 ---
 
+    let resizeTimer;
     window.addEventListener('resize', () => {
-        const activeItem = document.querySelector('.nav-link.active') || logoButton;
-        if (window.innerWidth > 768) {
-            moveIndicator(activeItem);
-        } else {
-            if (indicator) indicator.style.width = '0px'; // 手機版隱藏 Indicator
-        }
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const activeItem = document.querySelector('.nav-link.active') || logoButton;
+            if (window.innerWidth > 768) {
+                moveIndicator(activeItem);
+            } else {
+                if (indicator) {
+                    indicator.style.width = '0px'; // 手機版隱藏 Indicator
+                }
+            }
+        }, 100);
     });
 
-    // 頁面加載後的初始化位置
-    setTimeout(() => {
+    // 頁面加載後的初始化位置 (確保字體與圖片已載入)
+    window.addEventListener('load', () => {
         const initialActive = document.querySelector('.nav-link.active') || logoButton;
         moveIndicator(initialActive);
-    }, 300);
+    });
 });

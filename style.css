@@ -174,6 +174,26 @@ body:not(.en-mode) .work-overlay.lang-zh {
     pointer-events: none;
 }
 
+/* 電腦版語系按鈕樣式 */
+.lang-switch-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: black;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    transition: var(--transition-smooth);
+    margin-right: 15px; /* 根據排版調整間距 */
+}
+
+.lang-switch-btn:hover {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
 /* 當被選中時，文字變白色才清晰 */
 .nav-link.active, .nav-logo.active .logo-text {
     color: #ffffff !important; /* 強制變白 */
@@ -193,6 +213,10 @@ body:not(.en-mode) .work-overlay.lang-zh {
         padding: 0 8px; /* 減少左右內距，防止推擠 */
         z-index: 1000;
         pointer-events: none; /* 確保背後的內容可以點擊 */
+    }
+
+    .lang-switch-btn {
+    display: none;
     }
 
     .navbar-container {
