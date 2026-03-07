@@ -85,20 +85,6 @@ body:not(.en-mode) .work-overlay.lang-zh {
     align-items: center;
 }
 
-.nav-group {
-    display: flex;
-    align-items: center;
-    gap: 20px
-}
-
-.nav-group.right {
-    justify-content: center; /* 右側組靠中間對齊 */
-}
-
-.nav-group.left {
-    justify-content: center; 
-}
-
 .nav-link, .logo-text {
     position: relative;
     z-index: 5; /* 提高層級，確保在藍色塊上面 */
@@ -201,7 +187,11 @@ body:not(.en-mode) .work-overlay.lang-zh {
 }
 
 /* --- 桌機版基礎微調 (確保原本 layout 不動) --- */
-.nav-menu-wrapper { display: flex; align-items: center; }
+.nav-menu-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 .mobile-controls { display: none; } /* 桌機隱藏手機控制項 */
 
 /* --- 手機版 --- */
@@ -304,21 +294,21 @@ body:not(.en-mode) .work-overlay.lang-zh {
     }
 
     .nav-menu-wrapper {
-        display: none;
-        position: fixed;
-        top: 65px;
-        left: 8px;
-        right: 8px;
-        width: calc(100% - 16px);
-        background: rgba(255, 255, 255, 0.6); 
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        flex-direction: column;
-        padding: 10px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        z-index: 999;
-        box-sizing: border-box;
+    display: none;
+    position: fixed;
+    top: 65px;
+    left: 8px;
+    right: 8px;
+    width: calc(100% - 16px);
+    background: rgba(255, 255, 255, 0.6); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 999;
+    box-sizing: border-box;
     }
 
     .nav-menu-wrapper.active {
@@ -336,6 +326,10 @@ body:not(.en-mode) .work-overlay.lang-zh {
         padding: 15px;
         width: 100%;
         text-align: center;
+    }
+
+    .nav-link.active {
+    color: var(--primary-blue) !important;
     }
 
     .lang-btn-container {
@@ -437,6 +431,22 @@ body:not(.en-mode) .work-overlay.lang-zh {
     white-space: nowrap; /* 文字不換行 */
 }
 
+@media (max-width: 768px) {
+    .hero {
+        height: auto;
+        padding: 80px 0;
+    }
+    
+    .hero-container {
+        width: 90%;
+        max-width: 240px;
+    }
+
+    .hero-title {
+        font-size: clamp(40px, 10vw, 94px);
+    }
+}
+
 .about-section {
     width: 100%;
     height: 765px;
@@ -496,7 +506,7 @@ body:not(.en-mode) .work-overlay.lang-zh {
 }
 
 /* 手機版響應式 */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .about-section {
         height: auto;
         padding: 80px 0;
