@@ -72,10 +72,9 @@ body:not(.en-mode) .work-overlay.lang-zh {
 .navbar-container {
     pointer-events: auto; /* 開啟點擊 */
     width: fit-content; /* 寬度根據內容自適應 */
-    min-width: 700px;   /* 設定一個最小寬度防止太擠 */
-    max-width: 900px;
+    min-width: 1000px;
     height: 50px;
-    padding: 0 30px;
+    padding: 5px 10px;
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -187,19 +186,28 @@ body:not(.en-mode) .work-overlay.lang-zh {
 /* --- 手機版重構 --- */
 @media (max-width: 768px) {
     .header-wrapper {
-        position: absolute; /* 取消 Fixed，隨頁面捲動 */
-        top: 15px;
-        padding: 0 15px;
-        pointer-events: auto;
+        top: 4px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 0 8px; /* 減少左右內距，防止推擠 */
+        z-index: 1000;
+        pointer-events: none; /* 確保背後的內容可以點擊 */
     }
 
     .navbar-container {
+        background: rgba(255, 255, 255, 0.6); 
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         width: 100%;
         min-width: unset;
-        height: 50px;
-        border-radius: 40px;
-        padding: 0, 8px;
-        justify-content: space-between; /* 讓 Logo 與控制區分開 */
+        height: 52px;
+        border-radius: 26px;
+        padding: 0 6px; /* 內部元件離邊緣再縮一點 */
+        pointer-events: auto; /* 讓導覽列恢復點擊 */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .navbar {
@@ -209,13 +217,15 @@ body:not(.en-mode) .work-overlay.lang-zh {
 
     /* Logo 靠左且藍底白字樣式 */
     .nav-logo {
-        padding: 8px 15px;
+        padding: 8px 10px;
         background-color: var(--primary-blue);
         border-radius: 20px;
+        transform: scale(1.3); /* 核心關鍵：將 Logo 整體放大，突破 header 高度限制 */
+        transform-origin: left center;
         order: 1;
     }
     .main-logo {
-        width: 80px;
+        width: 65px;
         filter: brightness(0) invert(1) !important; /* 強制變白 */
     }
 
@@ -235,16 +245,16 @@ body:not(.en-mode) .work-overlay.lang-zh {
         background: none;
         border: 1px solid #101010;
         border-radius: 15px;
-        padding: 4px 10px;
-        font-size: 12px;
+        padding: 2px 8px;
+        font-size: 13px;
         font-weight: bold;
         cursor: pointer;
     }
 
-    /* 漢堡選單圖示 (純 CSS) */
     .hamburger-menu {
-        width: 24px;
-        height: 18px;
+        width: 18px;
+        height: 12px;
+        margin: 0 10px 0 0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -261,14 +271,16 @@ body:not(.en-mode) .work-overlay.lang-zh {
     /* 導覽選單展開樣式 */
     .nav-menu-wrapper {
         display: none; /* 預設隱藏 */
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
+        position: fixed;
+        top: 65px;
+        left: 8px;     /* 與 header-wrapper 的 padding 保持一致 */
+        right: 8px;
+        width: calc(100% - 20px); /* 扣除左右邊距，使其置中 */
+        background: rgba(255, 255, 255, 0.6); 
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         flex-direction: column;
-        padding: 20px;
+        padding: 10px;
         border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         z-index: 999;
