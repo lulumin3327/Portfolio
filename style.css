@@ -1076,6 +1076,12 @@ body:not(.en-mode) .work-overlay.lang-zh {
     margin-bottom: 60px; /* 與下方文字的間距 */
 }
 
+.gallery-title {
+    color: white;
+    margin-left: 200px;
+    margin-bottom: 20px;
+}
+
 .gallery-container {
     width: 85%;      /* 控制圖片佔螢幕的寬度，你可以改成 80% 或更小 */
     max-width: 1100px; /* 限制最大寬度，避免在大螢幕上太巨大 */
@@ -1083,6 +1089,21 @@ body:not(.en-mode) .work-overlay.lang-zh {
     display: flex;
     flex-direction: column;
     line-height: 0;
+}
+
+.gallery-container.frames-row {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 1280px;
+}
+
+.gallery-container.frames-row img {
+    width: 0;
+    flex: 1 1 0;
+    height: auto;
+    object-fit: contain;
 }
 
 .gallery-container img {
@@ -1209,5 +1230,15 @@ body:not(.en-mode) .work-overlay.lang-zh {
     .detail-meta {
         flex-direction: column;
         gap: 20px;
+    }
+
+        .gallery-container.frames-row {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .gallery-container.frames-row img {
+        width: 100%;
+        flex: none;
     }
 }
