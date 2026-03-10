@@ -570,7 +570,12 @@ body:not(.en-mode) .work-overlay.lang-zh {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border-radius: 4px; /* 稍微加一點點圓角，視覺較不生硬 */
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: scale(1.02);
 }
 
 .service-card h3 {
@@ -1050,6 +1055,11 @@ body:not(.en-mode) .work-overlay.lang-zh {
     font-family: 'Italiana', serif;
     font-size: 48px; /* 調大一點點更有張力 */
     color: white;
+}
+
+.detail-title.lang-zh {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 700;
 }
 
 .detail-meta {
