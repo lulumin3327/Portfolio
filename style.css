@@ -433,7 +433,7 @@ body:not(.en-mode) .work-overlay.lang-zh {
 
 @media (max-width: 768px) {
     .hero {
-        height: auto;
+        height: 100dvh;  
         padding: 80px 0;
     }
     
@@ -1071,14 +1071,21 @@ body:not(.en-mode) .work-overlay.lang-zh {
     font-weight: 300;
 }
 
-.detail-gallery {
-    width: 100%;
-    margin-bottom: 60px; /* 與下方文字的間距 */
+.gallery-title {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    width: 85%;
+    max-width: 1100px;
+    margin: 40px auto 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .gallery-title {
     color: white;
-    margin-left: 200px;
     margin-bottom: 20px;
 }
 
@@ -1164,6 +1171,27 @@ body:not(.en-mode) .work-overlay.lang-zh {
     margin-bottom: 30px;
 }
 
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #0039F5;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(0, 57, 245, 0.3);
+    padding-bottom: 2px;
+    margin-top: 20px;
+    transition: border-color 0.2s, opacity 0.2s;
+}
+
+.project-link:hover {
+    border-color: #0039F5;
+    opacity: 0.75;
+}
+
 .meta-item span {
     color: #0039F5;
     font-size: 12px;
@@ -1227,9 +1255,20 @@ body:not(.en-mode) .work-overlay.lang-zh {
     .gallery-container, .detail-header .container, .detail-info-bottom .container {
         width: 90%; /* 手機版佔寬一點 */
     }
+
+    .gallery-title {
+        width: 90%;
+        margin: 28px auto 14px;
+    }
+
     .detail-meta {
         flex-direction: column;
         gap: 20px;
+    }
+
+    .project-link {
+        font-size: 12px;
+        margin-top: 16px;
     }
 
         .gallery-container.frames-row {
