@@ -13,11 +13,12 @@ html, body {
 }
 
 h2{
-    font-size: 48px; /* 修改為你想要的大小 */
+    font-size: 42px;
     color: white;
     padding: 40px 0;
     font-family: 'Italiana', 'Noto Sans TC', serif;
     text-transform: uppercase; /* 視需求決定是否轉為大寫 */
+    font-weight: normal;
 }
 
 :root {
@@ -476,9 +477,8 @@ body:not(.en-mode) .work-overlay.lang-zh {
     z-index: 2;
 }
 
-/* 覆寫全域 h2 在此處的樣式 */
 .about-section h2.about-title {
-    font-size: 64px;
+    font-size: 40px;
     color: #ffffff;
     padding: 0; /* 移除全域的 100px padding */
     margin-bottom: 40px;
@@ -529,7 +529,7 @@ body:not(.en-mode) .work-overlay.lang-zh {
     }
     
     .about-section h2.about-title {
-        font-size: 48px;
+        font-size: 40px;
     }
 }
 /* Service 區塊 - 使用 Grid 重新設計 */
@@ -631,6 +631,10 @@ body:not(.en-mode) .work-overlay.lang-zh {
     }
     .service-card {
         min-height: auto;
+    }
+
+    .service-main-title {
+        font-size: 40px;
     }
 }
 
@@ -763,6 +767,10 @@ body:not(.en-mode) .work-overlay.lang-zh {
     
     .work-image-box {
         height: 250px;
+    }
+
+    .work-main-title {
+        font-size: 40px;
     }
 }
 
@@ -1002,7 +1010,27 @@ body:not(.en-mode) .work-overlay.lang-zh {
         gap: 40px;
     }
     .social-icons {
+        gap: 12px;
+        flex-wrap: wrap;
         justify-content: center;
+        padding: 0 16px;
+        box-sizing: border-box;
+    }
+
+    .social-item {
+        width: 72px;
+        height: 72px;
+    }
+
+    .diamond-bg {
+        width: 50px;
+        height: 50px;
+    }
+
+    .social-item img,
+    .social-item svg {
+        width: 32px;
+        height: 32px;
     }
 }
 
@@ -1011,19 +1039,18 @@ body:not(.en-mode) .work-overlay.lang-zh {
     background: #101010;
     color: white;
     
-    /* 核心修改：啟動 Flexbox 並設定對齊 */
-    display: flex;           /* 必須啟動此行 */
-    justify-content: center; /* 水平置中 */
-    align-items: center;     /* 垂直置中 */
+    display: flex;           
+    justify-content: center; 
+    align-items: center;    
     
-    margin-top: 50px;        /* 建議只設定 top，避免影響寬度 */
-    width: 100%;             /* 確保寬度撐滿，文字才好置中 */
+    margin-top: 50px;   
+    width: 100%;           
 }
 
 .footer-content p {
     font-size: 14px;
     opacity: 0.7;
-    margin: 0;               /* 移除 p 標籤預設的上下間距 */
+    margin: 0;            
 }
 
 /* 手機版響應式 */
@@ -1046,14 +1073,14 @@ body:not(.en-mode) .work-overlay.lang-zh {
 }
 
 .detail-header .container {
-    width: 85%; /* 這裡控制標題的縮排 */
+    width: 85%; 
     max-width: 1100px;
     margin: 0 auto 40px auto;
 }
 
 .detail-title {
     font-family: 'Italiana', serif;
-    font-size: 48px; /* 調大一點點更有張力 */
+    font-size: 48px; 
     color: white;
 }
 
@@ -1069,7 +1096,7 @@ body:not(.en-mode) .work-overlay.lang-zh {
 }
 
 .meta-item span {
-    color: #0039F5; /* 品牌藍 */
+    color: #0039F5; 
     font-size: 14px;
     text-transform: uppercase;
     display: block;
@@ -1100,9 +1127,9 @@ body:not(.en-mode) .work-overlay.lang-zh {
 }
 
 .gallery-container {
-    width: 85%;      /* 控制圖片佔螢幕的寬度，你可以改成 80% 或更小 */
-    max-width: 1100px; /* 限制最大寬度，避免在大螢幕上太巨大 */
-    margin: 0 auto;  /* 置中 */
+    width: 85%;      
+    max-width: 1100px; 
+    margin: 0 auto; 
     display: flex;
     flex-direction: column;
     line-height: 0;
